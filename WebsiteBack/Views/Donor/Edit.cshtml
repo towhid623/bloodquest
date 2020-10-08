@@ -1,0 +1,232 @@
+﻿@model Services.ViewModels.VmDonorAdd
+@{
+    ViewBag.Title = "Edit Profile";
+    Layout = "~/Views/Shared/_LayoutBlank.cshtml";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
+<section class="register">
+    <div class="container register_page">
+        <div class="register_page_card background-white padding-xy border-radius">
+            <div class="register_page_card_header background-red border-radius text-center padding-half-xy mb-3 color-white">
+                <h2>Edit</h2>
+                <p>Edit your profile information</p>
+            </div>
+
+            @using (Html.BeginForm("Add", "Donor", FormMethod.Post, new { @id = "mainForm", enctype = "multipart/form-data", @autocomplete = "off", onSubmit = "return ValidateFormData()" }))
+            {
+                <input type="hidden" name="BloodDonorHeaderId" value="0" />
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Your Name</label>
+                            @Html.TextBoxFor(Model => Model.BloodDonorName, new { @class = "form-control", id = "BloodDonorName", @maxlength = "100", @placeholder = "Write Your Name Here" })
+                            @Html.ValidationMessageFor(Model => Model.BloodDonorName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email</label>
+                            @Html.TextBoxFor(Model => Model.Email, new { @class = "form-control", id = "Email", @maxlength = "100", @placeholder = "Write Your Name Here" })
+                            @Html.ValidationMessageFor(Model => Model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Password</label>
+                            @Html.TextBoxFor(Model => Model.Password, new { @class = "form-control", id = "Password", @maxlength = "100", @placeholder = "Write Your Password Here" })
+                            @Html.ValidationMessageFor(Model => Model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Confirm Password</label>
+                            @Html.TextBoxFor(Model => Model.ConfirmPassword, new { @class = "form-control", id = "ConfirmPassword", @maxlength = "100", @placeholder = "Confirm Your Password" })
+                            @Html.ValidationMessageFor(Model => Model.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Mobile Number</label>
+                            @Html.TextBoxFor(Model => Model.MobileNo, new { @class = "form-control", id = "MobileNo", @maxlength = "100", @placeholder = "Write Your Name Here" })
+                            @Html.ValidationMessageFor(Model => Model.MobileNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Mobile Number(Optional)</label>
+                            @Html.TextBoxFor(Model => Model.PhoneNo, new { @class = "form-control", id = "MobileNo", @maxlength = "100", @placeholder = "Write Your Name Here" })
+                            @Html.ValidationMessageFor(Model => Model.PhoneNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Your Blood Group</label>
+                            @Html.DropDownListFor(model => model.Bloodgroup, new SelectList(ViewBag.bloodGroups, "Id", "Name"), "Select", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(Model => Model.Bloodgroup, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Gender</label>
+                            @Html.DropDownListFor(model => model.Gender, new SelectList(ViewBag.gendertypes, "Id", "Name"), "Select", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(Model => Model.Gender, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Division</label>
+                            <select class="form-control" name="Division" id="Division">
+                                <option value="">Select Division</option>
+                            </select>
+                            @Html.ValidationMessageFor(Model => Model.Division, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">District</label>
+                            <select class=" form-control" name="District" id="District">
+                                <option value="">Select District</option>
+                            </select>
+                            @Html.ValidationMessageFor(Model => Model.District, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Thana/Upazilla</label>
+
+                            <select class=" form-control" name="Thana" id="Thana">
+                                <option value="">Select Thana</option>
+                            </select>
+                            @Html.ValidationMessageFor(Model => Model.Thana, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Birth Date</label>
+                            @Html.TextBoxFor(Model => Model.DOB, new { @class = "form-control", id = "dob", @maxlength = "100", @placeholder = "DD/MM/YYYY" })
+                            @Html.ValidationMessageFor(Model => Model.DOB, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Occupation</label>
+                            @Html.TextBoxFor(Model => Model.Occupation, new { @class = "form-control", id = "Occupation", @maxlength = "100", @placeholder = "Write Your Occupation Here" })
+                            @Html.ValidationMessageFor(Model => Model.Occupation, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Social Contact(fb/linkedin/..)</label>
+                            @Html.TextBoxFor(Model => Model.FbUrl, new { @class = "form-control", id = "FbUrl", @maxlength = "100", @placeholder = "Write Any of Your Social Contact Here" })
+                            @Html.ValidationMessageFor(Model => Model.FbUrl, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Last Donated</label>
+                            @Html.TextBoxFor(Model => Model.LastDonated, new { @class = "form-control", id = "lastdonate", @maxlength = "100", @placeholder = "DD/MM/YYYY" })
+                            @Html.ValidationMessageFor(Model => Model.LastDonated, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <label for="exampleInputEmail1">Upload Image</label>
+                        <input type="file" class="form-control" placeholder="Upload Image" name="ProPic" accept="image/" id="ImageUrl" />
+                        <span class="field-validation-valid text-danger" data-valmsg-for="File" data-valmsg-replace="true" id="spnfileTxt"></span>
+                        <span class="field-validation-valid text-danger" id="spnfile"></span>
+                    </div>
+                    <div class="col-sm-3 col-xs-6">
+                        <label for="exampleInputEmail1">Ready for donate?</label><br />
+                        @Html.CheckBoxFor(model => model.ReadyForDonate, new { @data_toggle = "toggle", data_onstyle = "success", @data_on = "Yes", data_offstyle = "danger", @data_off = "No", @class = "form-control", @checked = "checked", })
+                    </div>
+                </div>
+
+                <button type="button"class="btn btn-danger mr-3" onclick="history.back();">Go Back Without Changing</button>
+                <button type="submit" class="btn btn-success float-right">Update</button>
+                <div class="clearfix"></div>
+            }
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script>
+        var divisionList = JSON.parse('@Html.Raw(Json.Encode(ViewBag.DivisionList))');
+        var districtList = JSON.parse('@Html.Raw(Json.Encode(ViewBag.DistrictList))');
+        var thanaList = JSON.parse('@Html.Raw(Json.Encode(ViewBag.ThanaList))');
+
+        $(document).ready(function () {
+            debugger;
+            if (divisionList != null && typeof divisionList != "undefined") {
+                divisionList.forEach(function (elem) {
+                    $("#Division").append(new Option(elem.Name, elem.Id));
+                });
+            }
+        });
+        $(function () {
+            $('#dob').datepicker({
+                format: 'dd/mm/yyyy',
+                todayHighlight: true,
+                autoclose: true,
+                orientation: "top left"
+            }).on('changeDate', function (e) {
+                $('#dob input').val(e.date);
+            });
+        });
+        $(function () {
+            $('#lastdonate').datepicker({
+                format: 'dd/mm/yyyy',
+                todayHighlight: true,
+                autoclose: true,
+                orientation: "top left"
+            }).on('changeDate', function (e) {
+                $('#lastdonate input').val(e.date);
+            });
+        });
+
+        $("#Division").change(function () {
+            debugger;
+            var id = $("#Division").val();
+            DivisionWiseDistrict(id);
+        });
+        $("#District").change(function () {
+            debugger;
+            var id = $("#District").val();
+            DistrictWiseThana(id);
+        });
+        $("#Thana").change(function () {
+            var id = $("#Thana").val();
+        });
+        function DivisionWiseDistrict(id) {
+            ClearDistrict();
+            debugger;
+            disList = districtList.filter(f => f.DivisionHeaderId == id);
+            if (disList != null && typeof disList != "undefined") {
+                disList.forEach(function (elem) {
+                    $("#District").append(new Option(elem.DistrictName, elem.DistrictHeaderId));
+                });
+            }
+        }
+        function ClearDistrict() {
+            $("#District").html('');
+            $("#District").append(new Option("Select District", null));
+            ClearThana();
+        }
+        function DistrictWiseThana(id) {
+            ClearThana();
+            thaList = thanaList.filter(f => f.DistrictHeaderId == id);
+            if (thaList != null && typeof thaList != "undefined") {
+                thaList.forEach(function (elem) {
+                    $("#Thana").append(new Option(elem.ThanaName, elem.ThanaHeaderId));
+                });
+            }
+        }
+        function ClearThana() {
+            $("#Thana").html('');
+            $("#Thana").append(new Option("Select Thana", null));
+        }
+    </script>
+}

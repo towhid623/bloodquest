@@ -1,0 +1,368 @@
+﻿ 
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>@ViewBag.Title</title>
+    <!-- Favicon-->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="~/Content/AdminBSBMaterialDesign/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="~/Content/AdminBSBMaterialDesign/plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="~/Content/AdminBSBMaterialDesign/plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Morris Chart Css-->
+    <link href="~/Content/AdminBSBMaterialDesign/plugins/morrisjs/morris.css" rel="stylesheet" />
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="~/Content/AdminBSBMaterialDesign/css/themes/all-themes.css" rel="stylesheet" />
+
+    <!-- JQuery DataTable Css -->
+    <link href="~/Content/datatable-material-customised/material-design-lite.css" rel="stylesheet" />
+    <link href="~/Content/datatable-material-customised/dataTables.material.min.css" rel="stylesheet" />
+    
+    <!-- Select2 Css -->
+    @*<link href="~/Content/Custom/select2.css" rel="stylesheet" />*@
+
+    <!-- Custom Css -->
+    <link href="~/Content/AdminBSBMaterialDesign/css/style.css" rel="stylesheet">
+    <link href="~/Content/Custom/customized.css" rel="stylesheet" />
+
+    @*<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">*@
+
+    <link href="~/Content/select2/css/select2.min.css" rel="stylesheet" />
+    <!-- JQuery DataTable Css -->
+    @*<link href="~/Content/AdminBSBMaterialDesign/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet" />*@
+</head>
+
+<body class="theme-red">
+
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="javascript:void(0);">Admin Pannel</a>
+                <a class="navbar-brand float-right" href="/Account/LogOff">Logout</a>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                    <li class="header">Menu Items</li>
+                    <li id="Website">
+                        <a href="~/Index/Index" target="_blank">
+                            <i class="material-icons">dashboard</i>
+                            <span>Website</span>
+                        </a>
+                    </li>
+                    @*<li>
+            <a href="javascript:void(0);" class="menu-toggle">
+                <i class="material-icons">widgets</i>
+                <span>Home</span>
+            </a>
+            <ul class="ml-menu">
+                <li>
+                    <a href="pages/tables/normal-tables.html">Slider</a>
+                </li>
+            </ul>
+        </li>*@
+                    <li id="Banner">
+                        <a href="~/AdminBanner/Banner">
+                            <i class="material-icons">widgets</i>
+                            <span>Banner</span>
+                        </a>
+                    </li>
+                    <li id="Service">
+                        <a href="~/AdminService/Service">
+                            <i class="material-icons">widgets</i>
+                            <span>Services</span>
+                        </a>
+                    </li>
+                    <li id="Achivement">
+                        <a href="~/AdminAchivement/Achivement">
+                            <i class="material-icons">widgets</i>
+                            <span>Achivements</span>
+                        </a>
+                    </li>
+                    <li id="Feedback">
+                        <a href="~/AdminFeedback/Feedback">
+                            <i class="material-icons">widgets</i>
+                            <span>Feedback</span>
+                        </a>
+                    </li>
+                    <li id="Package">
+                        <a href="~/AdminPackage/Package">
+                            <i class="material-icons">widgets</i>
+                            <span>Packages</span>
+                        </a>
+                    </li>
+                    <li id="Ftp">
+                        <a href="~/AdminFtp/Ftp">
+                            <i class="material-icons">widgets</i>
+                            <span>Media Servers</span>
+                        </a>
+                    </li>
+                    <li id="Support">
+                        <a href="~/AdminSupport/Support">
+                            <i class="material-icons">widgets</i>
+                            <span>Support</span>
+                        </a>
+                    </li>
+                    <li id="Contact">
+                        <a href="~/AdminContact/Contact">
+                            <i class="material-icons">widgets</i>
+                            <span>Contact</span>
+                        </a>
+                    </li>
+                    <li id="Footer">
+                        <a href="~/AdminFooter/Footer">
+                            <i class="material-icons">widgets</i>
+                            <span>Footer</span>
+                        </a>
+                    </li>
+                    <li id="Socialinfo">
+                        <a href="~/AdminSocial/Socialinfo">
+                            <i class="material-icons">widgets</i>
+                            <span>Social Info</span>
+                        </a>
+                    </li>
+                    <li id="Socialinfo">
+                        <a href="~/AdminZonal/Zonal">
+                            <i class="material-icons">widgets</i>
+                            <span>Zonal</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- #Menu -->
+            <!-- Footer -->
+            <div class="legal clearfix">
+                <div class="copyright">
+                    &copy; 2019 <a href="javascript:void(0);">SoftifyBD-Design</a>.
+                </div>
+                @*<div class="version">
+                        <b>Version: </b> 1.0.5
+                    </div>*@
+            </div>
+            <!-- #Footer -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+    </section>
+    <section class="content">
+        <!-- Page Loader -->
+        <div class="page-loader-wrapper">
+            <div class="loader">
+                <div class="preloader">
+                    <div class="spinner-layer pl-red">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+                <p>Please wait...</p>
+            </div>
+        </div>
+        <!-- #END# Page Loader -->
+        <!-- Overlay For Sidebars -->
+        <div class="overlay"></div>
+        <!-- #END# Overlay For Sidebars -->
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </section>
+
+    <!-- Jquery Core Js -->
+    <script src="~/Content/AdminBSBMaterialDesign/plugins/jquery/jquery.min.js"></script>
+    <!-- Popper Js -->
+    <script src="~/Scripts/popper.min.js"></script>
+    <!-- Bootstrap Core Js -->
+    <script src="~/Content/AdminBSBMaterialDesign/plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Select Plugin Js -->
+    @*<script src="~/Content/AdminBSBMaterialDesign/plugins/bootstrap-select/js/bootstrap-select.js"></script>*@
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="~/Content/AdminBSBMaterialDesign/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="~/Content/AdminBSBMaterialDesign/plugins/node-waves/waves.js"></script>
+
+    <!-- Jquery CountTo Plugin Js -->
+    <script src="~/Content/AdminBSBMaterialDesign/plugins/jquery-countto/jquery.countTo.js"></script>
+
+    <!-- Morris Plugin Js -->
+    <script src="~/Content/AdminBSBMaterialDesign/plugins/raphael/raphael.min.js"></script>
+    <script src="~/Content/AdminBSBMaterialDesign/plugins/morrisjs/morris.js"></script>
+
+    <!-- ChartJs -->
+    <script src="~/Content/AdminBSBMaterialDesign/plugins/chartjs/Chart.bundle.js"></script>
+
+    <!-- Sparkline Chart Plugin Js -->
+    <script src="~/Content/AdminBSBMaterialDesign/plugins/jquery-sparkline/jquery.sparkline.js"></script>
+
+    <!-- Custom Js -->
+    <script src="~/Content/AdminBSBMaterialDesign/js/admin.js"></script>
+
+    <!-- Jquery Datatable Js -->
+    <script src=" https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js "></script>
+    <script src=" https://cdn.datatables.net/1.10.19/js/dataTables.material.min.js "></script>
+
+    <!-- Demo Js -->
+    <script src="~/Content/AdminBSBMaterialDesign/js/demo.js"></script>
+
+    <!-- TinyMCE Js -->
+    <!-- Select2 Js -->
+    <script src="~/Scripts/Custom/select2.min.js"></script>
+    <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+
+        //$.get('/Index/GetIcons', function (data) {
+        //    var options = new Array();
+        //    $.each(data, function (index, icon) {
+        //        options.push({
+        //            id: icon.id,
+        //            text: '<i class="material-icons">' + icon.id + '</i> ' + '<span>' +'&nbsp;'+ icon.text + '<span>'
+        //        });
+        //    });
+
+        //    $('#select2').select2({
+        //        data: options,
+        //        escapeMarkup: function (markup) {
+        //            return markup;
+        //        }
+        //    });
+        //    // $("#icon").html('<i class="fa fa-2x fa-' + $('#select').val() + '"></i>');
+        //});
+
+        $.get('/Index/GetIcons', function (data) {
+            var options = new Array();
+            $.each(data, function (index, icon) {
+                options.push({
+                    id: icon.id,
+                    text: '<i class="material-icons">' + icon.id + '</i> ' + '<span>' + icon.text + '<span>'
+                });
+            });
+
+
+            $('#select2').select2({
+                data: options,
+                escapeMarkup: function (markup) {
+                    return markup;
+                }
+            });
+            // $("#icon").html('<i class="fa fa-2x fa-' + $('#select').val() + '"></i>');
+        });
+
+
+
+        $(document).ready(function () {
+            var url = window.location.pathname;
+            var link = $(".list").find("a");
+
+            $(link).each(function () {
+                var v = $(this).attr("href");
+                console.log(v);
+                if (v == url) {
+                    $(this).parent().addClass("active");
+                }
+
+            });
+
+            $(".select2").select2();
+
+                $(".select2-limiting").select2({
+                    maximumSelectionLength: 2
+                });
+            });
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+
+    <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+    <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
+
+
+    <script src="~/Content/AdminBSBMaterialDesign/plugins/tinymce/tinymce.min.js"></script>
+
+    <script src="~/Content/select2/js/select2.min.js"></script>
+
+    <script>
+        tinyMCE.init({
+            // General options
+            mode: "specific_textareas",
+            editor_selector: "tinymce",
+            height: 250,
+            theme: "modern",
+            height: "180px",
+            plugins: [
+                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars code fullscreen",
+                "insertdatetime media nonbreaking save table contextmenu directionality",
+                "emoticons template paste textcolor colorpicker textpattern imagetools"
+            ],
+            paste_data_images: true,
+            images_upload_url: '/Admin/UploadImage',
+            images_upload_base_path: '/Images/Blog',
+            menubar: "insert",
+            toolbar: "link",
+            relative_urls: false,
+            remove_script_host: false,
+            convert_urls: true,
+            // Theme options
+            toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+            toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+            toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+            theme_advanced_buttons1: "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
+            theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+            theme_advanced_buttons3: "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+            theme_advanced_buttons4: "insertlayer,moveforward,movebackward,absolute,|,styleprops,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,pagebreak,|,insertfile,insertimage",
+            theme_advanced_toolbar_location: "top",
+            theme_advanced_toolbar_align: "left",
+            theme_advanced_statusbar_location: "bottom",
+            theme_advanced_resizing: true,
+
+            // Example content CSS (should be your site CSS)
+            //content_css: "css/example.css"
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>
+

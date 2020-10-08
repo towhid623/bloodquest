@@ -1,0 +1,195 @@
+﻿@model Services.ViewModels.VmBlogAdd
+@{
+    ViewBag.Title = "Blog";
+    Layout = "~/Views/Shared/_LayoutBlank.cshtml";
+}
+
+<!-- main start -->
+<main>
+    <!-- search start -->
+    <section class="register">
+        <div class="container register_page">
+            <div class="search_item shadow padding-xy border-radius">
+                <div class="register_page_card_header background-red border-radius text-center padding-half-xy mb-3 color-white">
+                    <h2>Blog</h2>
+                    <p>Write a blog from here</p>
+                </div>
+                @using (Html.BeginForm("Add", "Blog", FormMethod.Post, new { @id = "mainForm", enctype = "multipart/form-data", @autocomplete = "off", onSubmit = "return ValidateFormData()" }))
+                {
+                    <input type="hidden" name="BlogHeaderId" value="0" id="BlogHeaderId" />
+                    <input type="hidden" name="IsFeedback" value="false" id="IsFeedback" />
+                    <div class="row form-group">
+                        <div class="col-sm-6">
+                            <label>Title</label>
+                            <input type="text" name="BlogTitle" id="BlogTitle" class="form-control" />
+                            <span id="spnBlogTitle" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Image</label>
+                            <input type="file" name="Image" id="Image" class="form-control" />
+                            <span id="spnImage" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-12">
+                            <label>Description</label>
+                            <textarea name="Description" id="Description" class="form-control" rows="3"></textarea>
+                            <span id="spnDescription" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success float-right">Submit</button>
+                    <a class="btn btn-danger float-left" href="/Home/Index">Back to Home</a>
+                }
+                <div class="gap"></div>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active text-center" id="pills-donor" role="tabpanel" aria-labelledby="pills-donor-tab">
+                        <table id="example" class="display" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>SN</th>
+                                    <th>Date</th>
+                                    <th>Blog Title</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="gap"></div>
+    </section>
+    <!-- search end -->
+    <!-- footer start -->
+    <!-- footer end -->
+</main>
+<!-- main end -->
+<!-- footer start -->
+<footer></footer>
+<!-- footer end -->
+@section Scripts{
+    <script>
+        var oTable;
+        $(document).ready(function () {
+            var loggedInUserId = JSON.parse('@Html.Raw(Json.Encode(ViewBag.LoggedInUserId))');
+            oTable = $("#example").DataTable({
+                    "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+                    "processing": true,
+                    "serverSide": false,
+                    "ordering": true,
+                    "ajax": {
+                        "url": "/Blog/AjaxBlogList"
+                    },
+                    "columns": [
+                        { "data": "BlogHeaderId" },
+                        { "data": "Date" },
+                        { "data": "Title" },
+                        { "data": "Description" },
+                        {
+                            "title": "Action",
+                            "render": function (data, type, row, meta) {
+                                return '<a class="delete text-danger"><i class="fas fa-trash-alt"></i></a>';
+                            }
+                        },
+                    ]
+                });
+
+        $(".ui.grid>.row").css("margin", "0");
+        });
+
+
+        function ValidateFormData() {
+            var isValid = true;
+            var title = $("#BlogTitle").val();
+            var image = $("#Image").val();
+            var description = $("#Description").val();
+            $("#spnBlogTitle").hide();
+            $("#spnImage").hide();
+            $("#spnDescription").hide();
+            if (title == null || title == "" || typeof title == "undefined") {
+                isValid = false;
+                $("#spnBlogTitle").html("Required");
+                $("#spnBlogTitle").show();
+            }
+            if (image == null || image == "" || typeof image == "undefined") {
+                isValid = false;
+                $("#spnImage").html("Required");
+                $("#spnImage").show();
+            }
+            if (description == null || description == "" || typeof description == "undefined") {
+                isValid = false;
+                $("#spnDescription").html("Required");
+                $("#spnDescription").show();
+            }
+            return isValid;
+        }
+
+        //START DELETE DATA
+        $(function () {
+            $('#example tbody').on('click', 'a.delete', function () {
+                var v = $(this).parent().parent();
+                console.log(v);
+                var rowData = oTable.row(v).data();
+                console.log(rowData);
+                var id = parseInt(rowData.BlogHeaderId);
+                $.get("/Blog/Disable?id=" + id, function (data) {
+                    if (!data || typeof data === 'undefined') {
+                        Swal.fire({
+                            type: 'error',
+                            position: 'top-end',
+                            text: 'Something Wrong, Data Can not be Delete...!!!',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            position: 'top-end',
+                            type: 'success',
+                            text: 'Data Delete Successfully',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                    }
+                    setTimeout(function () {
+                        oTable.ajax.reload();
+                    }, 2300);
+                });
+            });
+        });
+
+        $(function () {
+            $('#confirmation').on('click', '.confirmed', function () {
+                $.get("/Blog/Disable/" + id, function (data) {
+                    id = 0;
+                    if (!data || typeof data === 'undefined') {
+                        Swal.fire({
+                            type: 'error',
+                            position: 'top-end',
+                            text: 'Something Wrong, Data Can not be Delete...!!!',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            position: 'top-end',
+                            type: 'success',
+                            text: 'Data Delete Successfully',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                    }
+                    setTimeout(function () {
+                        oTable.ajax.reload();
+                    }, 2300);
+                });
+            });
+        });
+        //END DELETE DATA
+    </script>
+}

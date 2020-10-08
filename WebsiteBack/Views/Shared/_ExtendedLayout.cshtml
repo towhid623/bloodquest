@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome.min.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome-all.min.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome-all.css" rel="stylesheet" />
+    <link href="~/Content/Custom/achivement.css" rel="stylesheet" />
+    <link href="~/Content/Custom/animate.css" rel="stylesheet" />
+    <link href="~/Content/Custom/contact.css" rel="stylesheet" />
+    <link href="~/Content/Custom/footer.css" rel="stylesheet" />
+    <link href="~/Content/Custom/ftp.css" rel="stylesheet" />
+    <link href="~/Content/Custom/global.css" rel="stylesheet" />
+    <link href="~/Content/Custom/header.css" rel="stylesheet" />
+    <link href="~/Content/Custom/notice.css" rel="stylesheet" />
+    <link href="~/Content/Custom/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/Content/Custom/owl.theme.min.css" rel="stylesheet" />
+    <link href="~/Content/Custom/package.css" rel="stylesheet" />
+    <link href="~/Content/Custom/review.css" rel="stylesheet" />
+    <link href="~/Content/Custom/servrice.css" rel="stylesheet" />
+    <link href="~/Content/Custom/slider.css" rel="stylesheet" />
+    <link href="~/Content/Custom/support.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <!-- header start -->
+    @*<header class="heading shadow" id="heading">
+        <!-- navbar start -->
+        <nav class="navbar navbar-expand-md background-secondary">
+            <button class="navbar-toggler background-secondary" type="button" data-toggle="collapse"
+                    data-target="#ja_navbarToggler" aria-controls="ja_navbarToggler" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="color-offwhite"><i class="fas fa-caret-down"></i></span>
+            </button>
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0" id="ja_navbarToggler">
+                <a class="nav-link" href="~/Index/Index"><b>Back to Home </b></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="ja_navbarToggler">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse w-100 order-3" id="ja_navbarToggler">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" id="close-window" href="javascript:void(0)">Close <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- navbar end -->
+    </header>*@
+
+    <!-- header end -->
+    <div>
+        @RenderBody()
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        document.getElementById("close-window").addEventListener("click", function () {
+            window.close();
+        });
+    </script>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/Custom/carousel.js"></script>
+    <script src="~/Scripts/Custom/counter.js"></script>
+    <script src="~/Scripts/Custom/owl.carousel.min.js"></script>
+    <script src="~/Scripts/Custom/review.js"></script>
+    <script src="~/Scripts/Custom/map.js"></script>
+    <script src="~/Scripts/Custom/google.map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=SoftifyBD&callback=myMap"></script>
+    <script src="~/Scripts/Custom/back-to-top.js"></script>
+</body>
+</html>

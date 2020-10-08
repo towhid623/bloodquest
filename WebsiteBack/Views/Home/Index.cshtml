@@ -1,0 +1,462 @@
+﻿@model List<Entities.Models.BloodDonor>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<aside class="slider" id="slider">
+    <img src="~/Images/banner.png" alt="image" />
+</aside>
+<!-- main start -->
+<main>
+    <!-- search start -->
+    <section class="search background-offwhite" id="search">
+        <div class="container">
+            <div class="search_item shadow padding-xy text-center border-radius">
+                <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-donor-tab" data-toggle="pill" href="#pills-donor" role="tab"
+                           aria-controls="pills-donor" aria-selected="true">
+                            <h2>Find a Donor</h2>
+                            <p>A blood donor is the person who is determind to save someones life by donating his own blood</p>
+                        </a>
+                    </li>
+                </ul>
+                <div class="gap"></div>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-donor" role="tabpanel" aria-labelledby="pills-donor-tab">
+                        @if (ViewBag.LoggedInUserId != null)
+                        {
+                            <table id="example" class="display responsive nowrap" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>SN</th>
+                                        <th>Blood Group</th>
+                                        <th>Location</th>
+                                        <th>Mobile Number</th>
+                                        <th>Name</th>
+                                        <th>Last Donated</th>
+                                        <th>Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <table id="examplePublic" class="display responsive nowrap" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>SN</th>
+                                        <th>Blood Group</th>
+                                        <th>Location</th>
+                                        <th>Name</th>
+                                        <th>Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        }
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="gap"></div>
+    </section>
+    <!-- search end -->
+    <!-- achivement start -->
+    <section class="achivement background-red padding-2y shadow position-relative" id="achivement">
+        <div class="container">
+            <h2 class="color-white text-center">Our Achivements</h2>
+            <div class="gap"></div>
+            <div class="row text-center color-white">
+                <div class="achivement_item col-sm-3 col-xs-6">
+                    <i class="fas fa-user-lock"></i>
+                    <h3>@ViewBag.NumberOfDonor</h3>
+                    <h5>Registered Donor</h5>
+                </div>
+                <div class="achivement_item col-sm-3 col-xs-6">
+                    <i class="fas fa-user-check"></i>
+                    <h3>@ViewBag.NumberOfActiveDonor</h3>
+                    <h5>Active Donor</h5>
+                </div>
+                <div class="achivement_item col-sm-3 col-xs-6">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>@ViewBag.NumberOfBlog</h3>
+                    <h5>Blogs</h5>
+                </div>
+                <div class="achivement_item col-sm-3 col-xs-6">
+                    <i class="fas fa-quote-right"></i>
+                    <h3>@ViewBag.NumberOfFeedback</h3>
+                    <h5>Feedbacks</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- achivement end -->
+    <!-- graph start -->
+    <section class="graph background-offwhite" id="graph">
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <div class="graph_item shadow background-white border-radius padding-xy">
+                        <div style="width: 100%; height: 100%;">
+                            <canvas id="BloodGroupWisePieChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                    <div class="graph_item shadow background-white border-radius overflow-auto padding-xy">
+                        @*@foreach (var item in ViewBag.DistrictWiseBloodDonor)
+        {
+            <h6>@item.DistrictName<span class="badge badge-danger ml-3">@item.DistrictCount</span></h6>
+        }*@
+                        @if (ViewBag.DistrictWiseBloodDonor != null)
+                        {
+                            foreach (var item in ViewBag.DistrictWiseBloodDonor)
+                            {
+                                var ariaval = item.DistrictCount;
+                                <div id="skills">
+                                    <div class="skill mb-5">
+                                        <h5>@item.DistrictName</h5>
+                                        <div class="progress ml-3">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="@item.DistrictCount" aria-valuemin="0" aria-valuemax="10" data-width="@item.DistrictCount%">
+                                                <br />
+                                                <span class="percent">@item.DistrictCount</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+
+                        @*<div style="width: 100%; height: 100%;">
+            <canvas id="Top20DistrictChart"></canvas>
+        </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- graph end -->
+    <!-- news start -->
+    <section class="blog background-white" id="blog">
+        <div class="gap"></div>
+        <div class="container">
+            <h2 class="color-red text-center">Blogs</h2>
+            <div class="gap"></div>
+            <div class="row justify-content-center">
+                @foreach (var i in ViewBag.BlogList)
+                {
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="blog_item background-offwhite shadow border-radius">
+                            <a href="~/Home/BlogDetails?id=@i.BlogId">
+                                <img class="hover-zoom" src="@i.ImageUrl" alt="Image" />
+                                <article class="padding-xy" style="height: 190px;">
+                                    <h4 class="color-red">@i.Heading</h4>
+                                    <small class="color-black">
+                                        @Model.Where(w => w.BloodDonorHeaderId == i.BloodDonorHeaderId).FirstOrDefault().BloodDonorName
+                                    , </small>
+                                    @if (i.CreationDate != null)
+                                    {
+                                        <small class="color-black">
+                                            @i.CreationDate.ToString("dd MMM yyyy")
+                                        </small>
+                                    }
+
+                                    <p class="color-black" style="max-height:75px;overflow:hidden">
+                                        @i.Details
+                                    </p>
+                                </article>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <!-- news end -->
+    <!-- feedback start -->
+    <section class="background-offwhite feedback" id="feedback">
+        <div class="gap"></div>
+        <div class="container">
+            <h2 class="color-red text-center">User Feedbacks</h2>
+            <div class="gap"></div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="testimonial-slider" class="owl-carousel">
+                        @foreach (var i in ViewBag.FeedbackList)
+                        {
+                            <div class="testimonial">
+                                <div class="testimonial-content">
+                                    <div class="testimonial-icon">
+                                        <i class="fa fa-quote-left"></i>
+                                    </div>
+                                    <p class="description">
+                                        @i.Details
+                                    </p>
+                                </div>
+                                <h3 class="title"> @Model.Where(w => w.BloodDonorHeaderId == i.BloodDonorHeaderId).FirstOrDefault().BloodDonorName</h3>
+                                <span class="post"> @Model.Where(w => w.BloodDonorHeaderId == i.BloodDonorHeaderId).FirstOrDefault().Occupation</span>
+                            </div>
+                        }
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- feedback end -->
+    <!-- about start -->
+    <section class="about background-white padding-y">
+        <div class="container">
+            <h2 class="color-red text-center">Our Mission</h2>
+            <div class="gap"></div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <img src="~/Images/team.jpg" alt="Image" />
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="padding-xy">
+                        <p class="color-black text-justify">
+                            Every three seconds someone needs blood and one out of every 10 people entering a hospital needs blood. Just one pint of donated blood can help save as many as three people's lives. So the main purpose of developing this site is to help people in crutual moments when someone need blood badly. If all blood donors gave 2 to 4 times a year, it would help prevent blood shortages. If you began donating blood at age 17 and donated every 56 days until you reached 76, you would have donated 48 gallons of blood. About three gallons of blood supports any entire nation's blood needs for one minute. Giving blood will not decrease your strength. People donate blood out of a sense of duty and community spirit, not to make money. They are not paid for their donation. So come together, become a donor and save someones life.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- about end -->
+    <!-- contact start -->
+    @*<section class="contact background-offwhite padding-y">
+        <div class="container">
+            <h2 class="color-red text-center">Contact Us</h2>
+            <div class="gap"></div>
+            <p class="color-black text-center">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse soluta quia
+                dolores. Aliquam dignissimos ipsa ex excepturi sapiente eius, exercitationem debitis tempora officiis qui
+                tenetur quos ducimus sunt molestias accusamus!
+            </p>
+            <div class="contact_item card shadow border-radius border-0">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-5">
+                        <div class="contact_item_text background-red color-white padding-xy border-radius">
+                            Lorem ipsum dolor sit amet consectetur
+                            adipisicing elit. Perferendis eveniet neque ex beatae, maxime dolor at libero quas! Ea odit dicta nobis
+                            debitis. Impedit, expedita vero et fuga eligendi non.
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-7">
+                        <div class="contact_item_form background-white padding-xy border-radius">
+                            Lorem ipsum dolor sit amet consectetur
+                            adipisicing elit. Perferendis eveniet neque ex beatae, maxime dolor at libero quas! Ea odit dicta nobis
+                            debitis. Impedit, expedita vero et fuga eligendi non.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contact_map">
+            <img class="w-100" src="/dist/images/mapBanner.jpg" alt="Map">
+        </div>
+        <div class="gap-half"></div>
+    </section>*@
+    <!-- contact end -->
+    <!-- footer start -->
+    <section class="footer padding-xy background-red w-100 text-right">
+        <div onclick="sendEmail();" class="text-white" style="cursor:pointer"><i class="fas fa-envelope"></i>&nbsp;Contact us through Mail</div>
+    </section>
+    <!-- footer end -->
+</main>
+<!-- main end -->
+<!-- footer start -->
+<footer></footer>
+<!-- footer end -->
+@section Scripts{
+    <script>
+        function sendEmail() {
+            window.location = "mailto:blooddonorquest@gmail.com";
+        }
+
+        var pieChartData = JSON.parse('@Html.Raw(Json.Encode(ViewBag.PieChartData))');
+        var pieChartLabels = JSON.parse('@Html.Raw(Json.Encode(ViewBag.PieChartLabels))');
+        var barChartData = JSON.parse('@Html.Raw(Json.Encode(ViewBag.DistrictCount))');
+        var barChartLabels = JSON.parse('@Html.Raw(Json.Encode(ViewBag.DistrictName))');
+
+
+
+        $(document).ready(function () {
+            var loggedInUserId = JSON.parse('@Html.Raw(Json.Encode(ViewBag.LoggedInUserId))');
+            if (loggedInUserId != null) {
+                $("#example").DataTable({
+                    "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+                    processing: true,
+                    serverSide: false,
+                    "ordering": true,
+                    "ajax": {
+                        "url": "/Donor/AjaxDonorList"
+                    },
+                    "columns": [
+                        { "data": "DonorHeaderId" },
+                        { "data": "BloodGroup" },
+                        { "data": "Location" },
+                        { "data": "Mobile" },
+                        { "data": "Name" },
+                        { "data": "LastDonationDate" },
+                        {
+                            "title": "Details",
+                            "render": function (data, type, row, meta) {
+                                return '<a href="/Donor/Details/' + row.DonorHeaderId + '"><i class="fas fa-info-circle"></i></a>';
+                            }
+                        },
+                    ]
+                });
+            }
+            else {
+                $("#examplePublic").DataTable({
+                    "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+                    processing: true,
+                    serverSide: false,
+                    "ordering": true,
+                    "ajax": {
+                        "url": "/Donor/AjaxDonorList"
+                    },
+                    "columns": [
+                        { "data": "DonorHeaderId" },
+                        { "data": "BloodGroup" },
+                        { "data": "Location" },
+                        { "data": "Name" },
+                        {
+                            "title": "Details",
+                            "render": function (data, type, row, meta) {
+                                return '<a onclick="loginAlert()" data-toggle="tooltip" data-placement="top" title="Please Login to Get Details" href="javascript:void(0)"><i class="fas fa-info-circle"></i></a>';
+                            }
+                        },
+                    ]
+                });
+            }
+
+
+        $(".ui.grid>.row").css("margin", "0");
+        });
+
+        // Skills Progress Active js
+        $(window).on("scroll", function () {
+            var bar = $("#skills .progress-bar"),
+                barPos,
+                windowBtm = $(window).scrollTop() + $(window).height();
+            bar.each(function () {
+                barPos = $(this).offset().top;
+                if (barPos <= windowBtm - 0) {
+                    $(this).css("width", function () {
+                        return $(this).attr("data-width");
+                    });
+                    $(this).children(".percent").css({
+                        '-webkit-transform': 'scale(1)',
+                        '-moz-transform': 'scale(1)',
+                        '-ms-transform': 'scale(1)',
+                        '-o-transform': 'scale(1)',
+                        'transform': 'scale(1)'
+                    });
+                }
+            });
+        });
+
+        //pie chart
+        var bloodGroupChart = {
+            labels: pieChartLabels,
+            datasets: [{
+                data: pieChartData,
+                backgroundColor: ["#d61f29", "#7c0a02", "#8d021f", "#b80f0a", "#960018", "#580000"],
+            }],
+        };
+        var option = {
+            responsive: true,
+            maintainAspectRatio: false,
+        };
+
+        var piechart = document.getElementById('BloodGroupWisePieChart').getContext('2d');
+        var PieChart = new Chart(piechart, {
+            type: 'doughnut',
+            data: bloodGroupChart,
+            options: option,
+        });
+
+        //bar chart
+        //var top20districtwisechart = document.getElementById('Top20DistrictChart').getContext('2d');
+        //var bloodGroupChart = {
+        //    labels: barChartLabels, //["Dhaka", "Narayangonj", "Gazipur", "Shylet", "Barishal", "Rajshahi"],
+        //    datasets: [{
+        //        label: "Top 20 district with blood group",
+        //        data: barChartData, //["12", "13", "14", "11", "9", "16"],
+        //        backgroundColor: ["#3498DB", "#48C9B0", "#F4D03F", "#AF7AC5", "#000", "#D0D3D4"],
+        //    }],
+
+        //};
+        //var barChart = new Chart(top20districtwisechart, {
+        //    type: 'horizontalBar',
+        //    data: bloodGroupChart,
+        //    options: {
+        //        //responsive: true,
+        //        maintainAspectRatio: false,
+        //        scales: {
+        //            //xAxes: [{
+        //            //    ticks: {
+        //            //        maxRotation: 90,
+        //            //        minRotation: 90
+        //            //    }
+        //            //}],
+        //            xAxes: [{
+        //                //maxBarThickness: 5,
+        //                ticks: {
+        //                    beginAtZero: true,
+        //                }
+        //            }]
+        //        }
+        //    }
+        //});
+
+        function loginAlert() {
+            alert("Please login to get details");
+        }
+        //new Chart(top20districtwisechart).bar(bloodGroupChart, {
+        //    onAnimationComplete: function () {
+        //        var sourceCanvas = this.Chart.top20districtwisechart.canvas;
+        //        var copyWidth = this.scale.xScalePaddingLeft - 5;
+        //        var copyHeight = this.scale.endPoint + 5;
+        //        var targetCtx = document.getElementById("myChartAxis").getContext("2d");
+        //        targetCtx.canvas.width = copyWidth;
+        //        targetCtx.drawImage(sourceCanvas, 0, 0, copyWidth, copyHeight, 0, 0, copyWidth, copyHeight);
+        //    }
+        //});
+
+
+        //};
+        //var barChart = new Chart(top20districtwisechart, {
+        //    type: 'horizontalBar',
+        //    data: bloodGroupChart,
+        //    options: {
+        //        //responsive: true,
+        //        maintainAspectRatio: false,
+        //        scales: {
+        //            //xAxes: [{
+        //            //    ticks: {
+        //            //        maxRotation: 90,
+        //            //        minRotation: 90
+        //            //    }
+        //            //}],
+        //            xAxes: [{
+        //                //maxBarThickness: 5,
+        //                ticks: {
+        //                    beginAtZero: true,
+        //                }
+        //            }]
+        //        }
+        //    }
+        //});
+
+    </script>
+}

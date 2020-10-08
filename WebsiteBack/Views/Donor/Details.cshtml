@@ -1,0 +1,119 @@
+﻿@model Services.ViewModels.VmDonorDetails
+@{
+    Layout = "~/Views/Shared/_LayoutBlank.cshtml";
+    ViewBag.Title = "Details";
+}
+@Html.HiddenFor(Model => Model.BloodDonorHeaderId, new { @class = "form-control", @maxlength = "30", @placeholder = "ID" })
+<section class="profile">
+    <div class="container profile_page">
+        <div class="profile_page_card padding-xy shadow border-radius background-white">
+            <div class="profile_page_card_header background-offwhite border-radius text-center padding-xy mb-3 color-red">
+                <h2>Profile</h2>
+                <p>User Details Information</p>
+            </div>
+            <div class="row color-black">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center">
+                    @if (Model.ImageUrl == null || Model.ImageUrl == "")
+                    {
+                        <img src="~/Images/user.png" alt="profile-pic" />
+                    }
+                    else
+                    {
+                        <img src="@Model.ImageUrl" alt="profile-pic" />
+                    }
+
+                    <h6 class="mt-3">
+                        <b>
+                            @Model.BloodDonorName<br />@Model.ReadyForDonate<br />Blood Group: @Model.Bloodgroup
+                        </b>
+                    </h6>
+                </div>
+                <div class="col-lg-9 col-md-8 col-sm-6 col-xs-12">
+                    <h5>
+                        <b>
+                            <i class="far fa-user"></i>&nbsp;Personal Information&nbsp;
+                            @if (ViewBag.IsEditable == true)
+                            {
+                                <a href="/Donor/Edit/@Model.BloodDonorHeaderId" class="badge badge-danger">Edit</a>
+                            }
+                        </b>
+                    </h5>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <p class="padding-half-y"><b>User Name: </b>@Model.BloodDonorName</p>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <p class="padding-half-y"><b>Email: </b>@Model.Email</p>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <p class="padding-half-y">
+                                <b>Mobile Number: </b>@Model.MobileNo
+                            </p>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <p class="padding-half-y">
+                                <b>Mobile Number(Optional): </b>@Model.PhoneNo
+                            </p>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <p class="padding-half-y"><b>Blood Group: </b>@Model.Bloodgroup</p>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <p class="padding-half-y"><b>Gender: </b>@Model.Gender</p>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <p class="padding-half-y"><b>Date Of Birth: </b>@Model.DOB</p>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <p class="padding-half-y"><b>Occupation: </b>@Model.Occupation</p>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <p class="padding-half-y"><b>Division: </b>@Model.Division</p>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <p class="padding-half-y"><b>District: </b>@Model.District</p>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <p class="padding-half-y"><b>Thana/Upazilla: </b>@Model.Thana</p>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <p class="padding-half-y"><b>Address: </b>@Model.Address</p>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <p class="padding-half-y"><b>Social: </b>@Model.FbUrl</p>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <p class="padding-half-y"><b>Last Donated: </b>@Model.LastDonated</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="gap"></div>
+            <a class="btn btn-danger float-left" href="/Home/Index">Back to Home</a>
+            <div class="clearfix"></div>
+            @*<div class="profile_page_card_history">
+            <h5>
+                <b><i class="far fa-calendar-alt"></i>&nbsp;Donating History</b>
+            </h5>
+            <table>
+                <tr>
+                    <th>Donating Date</th>
+                    <th>Donated To</th>
+                    <th>Place of Donation</th>
+                </tr>
+                <tr>
+                    <td>12/12/18</td>
+                    <td>Jhon Doe</td>
+                    <td>Lab Aid Hospital, Dhanmondi</td>
+                </tr>
+                <tr>
+                    <td>12/12/18</td>
+                    <td>Jhon Doe</td>
+                    <td>Lab Aid Hospital, Dhanmondi</td>
+                </tr>
+            </table>
+        </div>*@
+        </div>
+    </div>
+</section>
+

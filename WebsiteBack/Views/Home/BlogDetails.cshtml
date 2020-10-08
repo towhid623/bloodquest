@@ -1,0 +1,40 @@
+﻿@*@model List<Entities.Models.BloodDonor>
+@{
+    ViewBag.Title = "Blog Details";
+    Layout = "~/Views/Shared/_LayoutBlank.cshtml";
+}
+
+<section class="register">
+    <div class="container register_page">
+        <div class="search_item shadow padding-xy border-radius">
+            @foreach (var v in ViewBag.BlogList)
+            {
+                <img class="w-100" src="@v.ImageUrl" alt="Image 404" />
+                <h3>@v.Heading</h3>
+                <p class="color-black">@v.Details</p>
+            }
+
+        </div>
+    </div>
+</section>*@
+
+@model Entities.Models.Blog
+@{
+    ViewBag.Title = "Blog Details";
+    Layout = "~/Views/Shared/_LayoutBlank.cshtml";
+}
+
+<section class="register">
+    <div class="container register_page">
+        <div class="search_item shadow padding-xy border-radius">
+                <img class="w-100" src="@Model.ImageUrl" alt="Image 404" />
+                <h3>@Model.Heading</h3>
+                <h5>- @ViewBag.Donor</h5>
+                <p class="color-black">@Model.Details</p>
+
+        </div>
+    </div>
+</section>
+
+
+
